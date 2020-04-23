@@ -78,9 +78,7 @@ class PdfActivityThread(
             .onTap(playerController)
             .defaultPage(initialPage)
 
-        if (opts.containsKey("pages")) {
-            configurator = configurator.pages(*opts.getIntArray("pages"))
-        }
+        
 
         configurator.load()
     }

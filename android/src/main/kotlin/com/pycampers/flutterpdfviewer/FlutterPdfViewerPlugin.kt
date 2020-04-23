@@ -9,7 +9,6 @@ import android.os.Bundle
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.pycampers.plugin_scaffold.createPluginScaffold
 import com.pycampers.plugin_scaffold.trySend
-import com.pycampers.plugin_scaffold.trySendError
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugin.common.PluginRegistry.Registrar
@@ -164,16 +163,7 @@ class FlutterPdfViewerMethods(val registrar: Registrar) {
             object : BroadcastReceiver() {
                 override fun onReceive(context: Context, intent: Intent) {
                     val args = intent.extras!!
-                    if (args.containsKey("error")) {
-                        trySendError(
-                            result,
-                            args.getString("error"),
-                            args.getString("message"),
-                            args.getString("stacktrace")
-                        )
-                    } else {
-                        trySend(result)
-                    }
+                    trySend(result)
                     broadcaster.unregisterReceiver(this)
                 }
             },
